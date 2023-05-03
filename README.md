@@ -4,11 +4,11 @@ This python code solves the main model in [*Guerrieri, Veronica and Guido Lorenz
 
 ## Baseline Model
 $$\begin{aligned}
-\max_{c_{it}, n_{it}, b_{it+1}} & \mathbb{E}\left[\sum_{t=0}^{\infty} \beta^{t} U\left(c_{i t}, n_{i t}\right)\right]\\
-\text{s.t.} \ \ &q_{t} b_{i t+1}+c_{i t} \leq b_{i t}+\theta_{i t}n_{i t}-\widetilde{\tau}_{i t}, \\
+\max_{c_{it}, n_{it}, b_{it+1}} & E\left[\sum_{t=0}^{\infty} \beta^{t} U\left(c_{i t}, n_{i t}\right)\right]\\
+\text{s.t.} \ \ &q_{t} b_{i t+1}+c_{i t} \leq b_{i t}+\theta_{i t}n_{i t}-T_{i t}, \\
 & n_{i t}\geq 0,\\
 &b_{i t+1} \geq -\phi, \\
-&\widetilde{\tau}_{i t}={
+&T_{i t}={
   \begin{cases}
     \tau_t & \text{if } \theta_{i t}>0\\
     \tau_t - \nu_t & \text{if } \theta_{i t}=0
@@ -27,7 +27,7 @@ B_{t}+u v_{t}=q_{t} B_{t+1}+\tau_{t},
 where $u = \Pr(\theta_{i t}=0)$ is the fraction of unemployed agents in the population. Note that the tax revenue is
 
 $$\begin{gather*}
-\sum_i \widetilde{\tau}_{i t} = \left( 1 - u \right) \tau_{t} + u \left( \tau_{t}- v_{t} \right) = \tau_{t} - u v_{t}.
+\sum_i T_{i t} = \left( 1 - u \right) \tau_{t} + u \left( \tau_{t}- v_{t} \right) = \tau_{t} - u v_{t}.
 \end{gather*}$$
 
 Here, the government fixes $B$  and $\nu$, and chooses $\tau_t$.
@@ -49,7 +49,7 @@ An equilibrium is  sequences of policy functions $\{c_t(b,\theta), n_t(b,\theta)
 Note that $U_1(0) = \infty$ implying $c>0$.
 
 $$\begin{aligned}
-\mathcal{L} =& \ \mathbb{E} \left[ \sum_{t=0}^\infty \beta^t \left[ U\left(c_{i t}, n_{i t}\right) + \lambda_{it} \left(   b_{i t}+\theta_{i t}n_{i t}-\widetilde{\tau}_{i t}   - q_{t} b_{i t+1} - c_{i t}  \right) + \mu_{it+1} \left( b_{it+1}+\phi \right)  +  \omega_{it}  n_{it}  \right] \right].
+\mathcal{L} =& \ E \left[ \sum_{t=0}^\infty \beta^t \left[ U\left(c_{i t}, n_{i t}\right) + \lambda_{it} \left(   b_{i t}+\theta_{i t}n_{i t}-T_{i t}   - q_{t} b_{i t+1} - c_{i t}  \right) + \mu_{it+1} \left( b_{it+1}+\phi \right)  +  \omega_{it}  n_{it}  \right] \right].
 \end{aligned}$$
 
 FOCs are as follows: 
@@ -57,19 +57,19 @@ FOCs are as follows:
 $$\begin{aligned}
 c_{it}&: \ \ U_c\left(c_{i t}, n_{i t}\right) - \lambda_{it} = 0,\\
 n_{it}&: \ \ U_n\left(c_{i t}, n_{i t}\right) + \lambda_{it} \theta_{i t} +  \omega_{it}= 0,\\ 
-b_{it+1}&:  \ \  - \lambda_{it}q_{t} + \mu_{it+1} +\beta  \mathbb{E}_{t}\left[\lambda_{it+1}\right] =0.
+b_{it+1}&:  \ \  - \lambda_{it}q_{t} + \mu_{it+1} +\beta  E_{t}\left[\lambda_{it+1}\right] =0.
 \end{aligned}$$
 
 By combining the above equations, we have the following equilibrium conditions:
 
 $$\begin{gather*}
-U_{c}\left(c_{i t}, n_{i t}\right) \geq \beta\left(1+r_{t}\right) \mathbb{E}_{t}\left[U_{c}\left(c_{i t+1}, n_{i t+1}\right)\right] \ \ \text{with equality if $b_{it+1}>-\phi$},\\
+U_{c}\left(c_{i t}, n_{i t}\right) \geq \beta\left(1+r_{t}\right) E_{t} \left[U_{c}\left(c_{i t+1}, n_{i t+1}\right)\right] \ \ \text{with equality if $b_{it+1}>-\phi$},\\
 \theta_{i t} U_{c}\left(c_{i t}, n_{i t}\right)+U_{n}\left(c_{i t}, n_{i t}\right) \leq 0  \ \ \text{with equality if $n_{it}>0$}.
 \end{gather*}$$
 
 Note that for constrained consumers, 
 
-$$c_{i t} = b_{i t}+\theta_{i t}n_{i t}-\widetilde{\tau}_{i t} + q_{t} \phi .$$
+$$c_{i t} = b_{i t}+\theta_{i t}n_{i t}-T_{i t} + q_{t} \phi .$$
 
 
 
@@ -83,7 +83,7 @@ U(c, n)=\frac{c^{1-\gamma}}{1-\gamma}+\psi \frac{(1-n)^{1-\eta}}{1-\eta}.
 By using the equilibrium conditions, 
 
 $$\begin{gather*}
-c_{it}^{-\gamma} \geq \beta\left(1+r_{t}\right) \mathbb{E}_{t}\left[c_{it+1}^{-\gamma} \right],\\
+c_{it}^{-\gamma} \geq \beta\left(1+r_{t}\right) E_{t}\left[c_{it+1}^{-\gamma} \right],\\
 n_{it}=\max \left[0, 1- \left(\frac{\psi}{\theta_{it}} \right)^\frac{1}{\eta} c_{it}^\frac{\gamma}{\eta} \right].
 \end{gather*}$$
 
